@@ -20,7 +20,7 @@ class WC_Minmax_Settings {
 	}
 
 	public function wc_minmax_order_settings_register( $settings ) {
-		$wc_minmax_settings = array(
+		$wc_minmax_order_settings = array(
 			array(
 				'title'    => __( 'WC Minimum Maximum Order', 'wcmmo' ),
 				'desc'     => __( 'Set all the settings for minimum and maximum order.', 'wcmmo' ),
@@ -44,10 +44,9 @@ class WC_Minmax_Settings {
 				'desc_tip' => true,
 			),
 			array( 'type' => 'sectionend', 'id' => 'wc_minmax_order_settings' ),
-
 		);
 
-		return array_merge( $settings, $wc_minmax_settings );
+		return array_merge( $settings, apply_filters( 'wc_minmax_order_settings', $wc_minmax_order_settings ) );
 	}
 
 }
