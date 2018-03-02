@@ -19,49 +19,43 @@ class WC_Minmax_Order {
 
 	public function wc_minimum_order() {
 		$minimum_order = get_option( 'wc_minmax_order_min' );
+		$notice = get_option( 'wc_minmax_order_min_notice' );
 
 		if ( empty( $minimum_order ) ) return;
 
 		if ( WC()->cart->total > $minimum_order ) return;
 
+		$notice = str_replace( 
+			array( '{amount}', '{current-amount}' ),
+			array( wc_price( $minimum_order ), wc_price( wc()->cart->total ) ),
+			$notice 
+		);
+
 		if ( is_cart() ) {
-			wc_print_notice(
-				sprintf( 'Minimum order total is %s, your current order is %s',
-					wc_price( $minimum_order ),
-					wc_price( WC()->cart->total )
-				), 'error'
-			);
+			wc_print_notice( sprintf( __(  $notice , 'wcmmo' ) ), 'error' );
 		} else {
-			wc_add_notice(
-				sprintf( 'Minimum order total is %s, your current order is %s', 
-					wc_price( $minimum_order ),
-					wc_price( WC()->cart->total )
-				), 'error'
-			);
+			wc_add_notice( sprintf( __(  $notice , 'wcmmo' ) ), 'error' );
 		}
 	}
 
 	public function wc_maximum_order() {
 		$maximum_order = get_option( 'wc_minmax_order_max' );
+		$notice = get_option( 'wc_minmax_order_max_notice' );
 
 		if ( empty( $maximum_order ) ) return;
 
 		if ( WC()->cart->total < $maximum_order ) return;
 
+		$notice = str_replace( 
+			array( '{amount}', '{current-amount}' ),
+			array( wc_price( $maximum_order ), wc_price( wc()->cart->total ) ),
+			$notice 
+		);
+
 		if ( is_cart() ) {
-			wc_print_notice(
-				sprintf( __( 'Maximum order is %s, your current order total is %s',
-					wc_price( $maximum_order ),
-					wc_price( WC()->cart->total )
-				, 'wcmmo' ) ), 'error'
-			);
+			wc_print_notice( sprintf( __(  $notice , 'wcmmo' ) ), 'error' );
 		} else {
-			wc_add_notice(
-				sprintf( __( 'Maximum order is %s, your current order is %s', 
-					wc_price( $maximum_order ),
-					wc_price( WC()->cart->total )
-				, 'wcmmo' ) ), 'error'
-			);
+			wc_add_notice( sprintf( __(  $notice , 'wcmmo' ) ), 'error' );
 		}
 	}
 
