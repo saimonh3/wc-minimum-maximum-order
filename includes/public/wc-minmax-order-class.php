@@ -18,16 +18,24 @@ class WC_Minmax_Order {
 	}
 
 	public function wc_minimum_order() {
+		$is_enabled = get_option( 'wc_minmax_order_min_enable' ); 
 		$minimum_order = get_option( 'wc_minmax_order_min' );
 		$notice = get_option( 'wc_minmax_order_min_notice' );
+		$without_shipping = get_option( 'wc_minmax_order_min_shipping' );
+		$without_tax = get_option( 'wc_minmax_order_min_tax' );
 
-		if ( empty( $minimum_order ) ) return;
+		if ( $is_enabled !== 'yes' || empty( $minimum_order ) ) return;
 
-		if ( WC()->cart->total > $minimum_order ) return;
+		$shipping_cost = isset( $without_shipping ) && $without_shipping == 'yes' ? WC()->cart->get_shipping_total() : '';
+		$tax_cost	   = isset( $without_tax ) && $without_tax == 'yes' ? WC()->cart->get_taxes_total() : '';
 
+		$cart_total = WC()->cart->total - ( $shipping_cost + $tax_cost );
+
+		if ( $cart_total > $minimum_order ) return;
+ 
 		$notice = str_replace( 
 			array( '{amount}', '{current-amount}' ),
-			array( wc_price( $minimum_order ), wc_price( wc()->cart->total ) ),
+			array( wc_price( $minimum_order ), wc_price( $cart_total ) ),
 			$notice 
 		);
 
@@ -39,16 +47,24 @@ class WC_Minmax_Order {
 	}
 
 	public function wc_maximum_order() {
+		$is_enabled = get_option( 'wc_minmax_order_max_enable' ); 
 		$maximum_order = get_option( 'wc_minmax_order_max' );
 		$notice = get_option( 'wc_minmax_order_max_notice' );
+		$without_shipping = get_option( 'wc_minmax_order_max_shipping' );
+		$without_tax = get_option( 'wc_minmax_order_max_tax' );
 
-		if ( empty( $maximum_order ) ) return;
+		if ( $is_enabled !== 'yes' || empty( $maximum_order ) ) return;
 
-		if ( WC()->cart->total < $maximum_order ) return;
+		$shipping_cost = isset( $without_shipping ) && $without_shipping == 'yes' ? WC()->cart->get_shipping_total() : '';
+		$tax_cost	   = isset( $without_tax ) && $without_tax == 'yes' ? WC()->cart->get_taxes_total() : '';
 
+		$cart_total = WC()->cart->total - ( $shipping_cost + $tax_cost );
+
+		if ( $cart_total > $maximum_order ) return;
+ 
 		$notice = str_replace( 
 			array( '{amount}', '{current-amount}' ),
-			array( wc_price( $maximum_order ), wc_price( wc()->cart->total ) ),
+			array( wc_price( $maximum_order ), wc_price( $cart_total ) ),
 			$notice 
 		);
 
