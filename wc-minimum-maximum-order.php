@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * Plugin Name: WC Minimum Maximum Order
 * Description: A simple plugin to set minimum or maximum order
@@ -34,7 +34,7 @@ final class WC_Minimum_Maximum_Order {
 		switch ( $type ) {
 			case 'admin':
 				return is_admin();
-			
+
 			case 'ajax':
 				return defined( 'DOING_AJAX' );
 
@@ -66,7 +66,7 @@ final class WC_Minimum_Maximum_Order {
 	}
 
 	public function activate() {
-      if ( ! function_exists( 'WC' ) ) {
+    	if ( ! function_exists( 'WC' ) ) {
             require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
             deactivate_plugins( plugin_basename( __FILE__ ) );
 
