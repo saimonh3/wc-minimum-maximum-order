@@ -68,6 +68,15 @@ class WC_Minmax_Settings {
 				'default'   => 'Minimum order is {amount}, your current order total is {current-amount}',
 				'desc_tip'  => true,
 			),
+
+			array(
+				'title'     => __( 'Enable', 'wcmmo' ),
+				'desc'      => __( 'Enable minimum order amount.', 'wcmmo' ),
+				'id'        => 'wc_minmax_order_max_enable',
+				'type'      => 'checkbox',
+				'options'	=> array( 'yes' ),
+				'desc_tip'  => true,
+			),
 			array(
 				'title'     => __( 'Maximum Order Amount', 'wcmmo' ),
 				'desc'      => __( 'Set the maximum order amount.', 'wcmmo' ),

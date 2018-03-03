@@ -60,7 +60,7 @@ class WC_Minmax_Order {
 
 		$cart_total = WC()->cart->total - ( $shipping_cost + $tax_cost );
 
-		if ( $cart_total > $maximum_order ) return;
+		if ( $cart_total < $maximum_order ) return;
  
 		$notice = str_replace( 
 			array( '{amount}', '{current-amount}' ),
