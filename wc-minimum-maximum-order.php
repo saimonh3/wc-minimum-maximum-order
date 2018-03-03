@@ -5,10 +5,10 @@
 * Author: Mohammed Saimon
 * Author URI: http://saimon.info
 * Version: 1.0
-* Tested up to: 4.3
+* Tested up to: 4.9.4
 * Requires PHP: 5.6
 * Text Domain: wcmmo
-* License: GPLv3 or Later License
+* License: GPLv2 or later
 **/
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -29,31 +29,6 @@ final class WC_Minimum_Maximum_Order {
 	public function define_constants() {
 		define( 'WC_MINMAX_ORDER_DIR', plugin_dir_path( __FILE__ ) );
 	}
-
-	// public function init_hooks() {
-	// 	$this->init_actions();
-	// 	$this->init_filters();
-	// }
-
-	// public function init_actions() {
-	// 	if ( $this->is_request( 'admin' ) ) {
-	// 		//
-	// 	}
-
-	// 	if ( $this->is_request( 'public' ) ) {
-
-	// 	}
-	// }
-
-	// public function init_filters() {
-	// 	if ( $this->is_request( 'admin' ) ) {
-	// 		//
-	// 	}
-
-	// 	if ( $this->is_request( 'public' ) ) {
-	// 		//
-	// 	}
-	// }
 
 	public function is_request( $type ) {
 		switch ( $type ) {
@@ -77,8 +52,6 @@ final class WC_Minimum_Maximum_Order {
 	}
 
 	public function includes() {
-		// require_once WC_MINMAX_ORDER_DIR . '/includes/functions.php';
-
 		if ( $this->is_request( 'admin' ) ) {
 			require_once WC_MINMAX_ORDER_DIR . '/includes/admin/wc-minmax-settings-class.php';
 		}
@@ -90,11 +63,15 @@ final class WC_Minimum_Maximum_Order {
 
 	public function init_plugin() {
 		$this->includes();
-		// $this->init_hooks();
 	}
 
 	public function activate() {
-		//
+      if ( ! function_exists( 'WC' ) ) {
+            require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+            deactivate_plugins( plugin_basename( __FILE__ ) );
+
+            wp_die( '<div class="error"><p>' . sprintf( __( '<b>WC Minimum Maximum Order</b> requires %sWooCommerce%s to be installed & activated!', 'dokan-lite' ), '<a target="_blank" href="https://wordpress.org/plugins/woocommerce/">', '</a>' ) . '</p></div>' );
+        }
 	}
 
 	public function deactivate() {
