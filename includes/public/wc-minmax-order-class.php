@@ -1,4 +1,4 @@
-<?php 
+<?php
 class WC_Minmax_Order {
 
 	public function __construct() {
@@ -7,7 +7,7 @@ class WC_Minmax_Order {
 
 	public function init_hooks() {
 		$this->init_actions();
-		$this->init_filters();
+		// $this->init_filters();
 	}
 
 	public function init_actions() {
@@ -18,7 +18,7 @@ class WC_Minmax_Order {
 	}
 
 	public function wc_minimum_order() {
-		$is_enabled = get_option( 'wc_minmax_order_min_enable' ); 
+		$is_enabled = get_option( 'wc_minmax_order_min_enable' );
 		$minimum_order = get_option( 'wc_minmax_order_min' );
 		$notice = get_option( 'wc_minmax_order_min_notice' );
 		$without_shipping = get_option( 'wc_minmax_order_min_shipping' );
@@ -32,11 +32,11 @@ class WC_Minmax_Order {
 		$cart_total = WC()->cart->total - ( $shipping_cost + $tax_cost );
 
 		if ( $cart_total > $minimum_order ) return;
- 
-		$notice = str_replace( 
+
+		$notice = str_replace(
 			array( '{amount}', '{current-amount}' ),
 			array( wc_price( $minimum_order ), wc_price( $cart_total ) ),
-			$notice 
+			$notice
 		);
 
 		if ( is_cart() ) {
@@ -47,7 +47,7 @@ class WC_Minmax_Order {
 	}
 
 	public function wc_maximum_order() {
-		$is_enabled = get_option( 'wc_minmax_order_max_enable' ); 
+		$is_enabled = get_option( 'wc_minmax_order_max_enable' );
 		$maximum_order = get_option( 'wc_minmax_order_max' );
 		$notice = get_option( 'wc_minmax_order_max_notice' );
 		$without_shipping = get_option( 'wc_minmax_order_max_shipping' );
@@ -61,11 +61,11 @@ class WC_Minmax_Order {
 		$cart_total = WC()->cart->total - ( $shipping_cost + $tax_cost );
 
 		if ( $cart_total < $maximum_order ) return;
- 
-		$notice = str_replace( 
+
+		$notice = str_replace(
 			array( '{amount}', '{current-amount}' ),
 			array( wc_price( $maximum_order ), wc_price( $cart_total ) ),
-			$notice 
+			$notice
 		);
 
 		if ( is_cart() ) {
@@ -75,9 +75,9 @@ class WC_Minmax_Order {
 		}
 	}
 
-	public function init_filters() {
-		//
-	}
+	// public function init_filters() {
+	// 	//
+	// }
 }
 
 new WC_Minmax_Order();
