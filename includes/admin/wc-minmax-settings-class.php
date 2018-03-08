@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class WC_Minmax_Settings {
 
@@ -7,13 +7,13 @@ class WC_Minmax_Settings {
 	}
 
 	public function init_hooks() {
-		$this->init_actions();
+		// $this->init_actions();
 		$this->init_filters();
 	}
 
-	public function init_actions() {
-
-	}
+	// public function init_actions() {
+	//
+	// }
 
 	public function init_filters() {
 		add_filter( 'woocommerce_get_settings_general', array( $this, 'wc_minmax_order_settings_register' ), 99 );
