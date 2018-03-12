@@ -1,11 +1,11 @@
 === WC Minimum Maximum Order ===
 Contributors: saimonh
-Donate link: https://saimon.info/donate/
+Donate link: http://saimon.info/donate/
 Tags: woocommerce, minimum order, maximum order, conditional cart
 Requires at least: 4.0
 Tested up to: 4.8
 Stable tag: trunk
-Requires PHP: 5.4
+Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,9 +13,9 @@ A simple woocommerce plugin to set minimum or maximum order.
 
 == Description ==
 
-With the help of this plugin you can set minimum or maximum order total on the cart and checkout page. By doing so, a customer has to buy more than the minimum order total or less than the maximum order total. 
+With the help of this plugin you can set minimum or maximum order total on the cart and checkout page. By doing so, a customer has to buy more than the minimum order total or less than the maximum order total.
 
-You can also include or exclude the the shipping and tax from the cart.
+You can also include or exclude the shipping and tax from the order total calculation.
 
 == Installation ==
 
@@ -34,10 +34,16 @@ e.g.
 
 You can find all the settings under http://example.com/wp-admin/admin.php?page=wc-settings&tab=general
 
+=  =
+
+
+
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif).
+1. Error notice on the cart page
+2. Error notice on the checkout page
+3. Settings options
 
 == Changelog ==
 

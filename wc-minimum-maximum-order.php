@@ -21,7 +21,7 @@ final class WC_Minimum_Maximum_Order {
 		$this->define_constants();
 
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
-		register_activation_hook( __FILE__, array( $this, 'deactivate' ) );
+		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 
 		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
 	}
