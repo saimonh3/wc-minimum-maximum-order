@@ -3,7 +3,7 @@ Contributors: saimonh
 Donate link: http://saimon.info/donate/
 Tags: woocommerce, minimum order, maximum order, conditional cart
 Requires at least: 4.0
-Tested up to: 4.8
+Tested up to: 4.9.4
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
